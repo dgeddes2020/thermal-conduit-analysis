@@ -290,7 +290,8 @@ If either check fails, an error is displayed in the conduit panel and no cables 
 
 ```
 cable-thermal-analysis/
-├── thermal_app_v3.py     # Main application (current version)
+├── thermal_app_v4.py     # Main application (current version, fixed cable placement)
+├── thermal_app_v3.py     # Main application (revision)
 ├── thermal_app_v2.py     # Previous version (reference)
 ├── thermal_app.py        # Original proof-of-concept
 ├── requirements.txt      # Python dependencies for Docker environment
