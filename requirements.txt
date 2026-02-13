@@ -1,0 +1,24 @@
+# ============================================================
+# Cable Thermal Analysis Tool - Python Requirements
+# ============================================================
+# Designed for use with the dolfinx Docker image:
+#   docker pull dolfinx/dolfinx:v0.9.0
+#
+# After starting the container, install these with:
+#   pip install -r requirements.txt
+# ============================================================
+
+# Web application framework
+streamlit>=1.28.0
+
+# Data handling & export
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Plotting
+matplotlib>=3.7.0
+
+# FEniCS / DOLFINx and solvers are pre-installed in the Docker image:
+#   dolfinx, ufl, ffcx, mpi4py, petsc4py
+# Do NOT install these via pip — they must come from the Docker image
+# to ensure correct compiled bindings.
