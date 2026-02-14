@@ -1,30 +1,17 @@
-# 1. Use the dolfinx image
+# Use the same dolfinx image you are already using
 FROM dolfinx/lab:stable
 
-# 2. Binder Compatibility Setup (REQUIRED)
-# Binder forces the user to be 'jovyan' (UID 1000). 
-# Without this block, your build will fail with permission errors.
-ARG NB_USER=jovyan
-ARG NB_UID=1000
-ENV USER ${NB_USER}
-ENV NB_UID ${NB_UID}
-ENV HOME /home/${NB_USER}
+# Set the working directory
+WORKDIR /app
 
-USER root
+# Copy your code and requirements into the container
+COPY . /app
 
-# Create the user Binder needs
-RUN adduser --disabled-password \
-    --gecos "Default user" \
-    --uid ${NB_UID} \
-    ${NB_USER}
-
-# 3. Copy your repo files into the image and fix permissions
-COPY . ${HOME}
-RUN chown -R ${NB_UID} ${HOME}
-
-# 4. Switch to the Binder user
-USER ${NB_USER}
-WORKDIR ${HOME}
-
-# 5. Install your requirements
+# Install the extra libraries automatically
 RUN pip install --no-cache-dir -r requirements.txt
+
+# Expose the port Streamlit uses
+EXPOSE 8501
+
+# Command to run the app immediately when the container starts
+ENTRYPOINT ["streamlit", "run", "thermal_app_v4.py", "--server.port=8501", "--server.address=0.0.0.0"]
